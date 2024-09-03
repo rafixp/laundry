@@ -169,4 +169,36 @@ class adminController extends Controller
             return redirect('/admin/user');
         }
     }
+
+    public function transaksiView(){
+        $get = Transaksi::latest()->get();
+        return view('admin.transaksi.transaksi', compact('get'));
+    }
+
+    public function tambahTransaksiView(){
+        $invoice = "CLN".date('YmdHis');
+        $get = Outlet::latest()->get();
+        $paket = Paket::latest()->get();
+        $pelanggan = Member::latest()->get();
+        return view('admin.transaksi.tambahtransaksi', compact('invoice','get','pelanggan','paket'));
+    }
+
+    public function tambahTransaksi(Req $req){
+        $data = $req->all();
+        if(Transaksi::create($data)){
+            return redirect('/admin/transaksi');
+        }
+    }
+
+    public function konfirmasi($id){
+        $get = Transaksi::findOrFail($id);
+        $paket = Paket::latest()->get();
+        return view('admin.transaksi.konfirmasi', compact('get','paket'));
+    }
+
+    public function cetakInvoice($id){
+        $get = Transaksi::findOrFail($id);
+        $tgl = date('d F Y - H.i');
+        return view('admin.transaksi.cetak', compact('get','tgl'));
+    }
 }

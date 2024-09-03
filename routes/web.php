@@ -52,5 +52,9 @@ Route::get('/admin/user/edit/{id}', [adminController::class, 'editUserView']);
 Route::post('/admin/user/tambah', [adminController::class, 'tambahUser']);
 Route::post('/admin/user/edit/{id}', [adminController::class, 'editUser']);
 Route::get('/admin/user/hapus/{id}', [adminController::class, 'hapusUser']);
-
+Route::get('/admin/transaksi', [adminController::class, 'transaksiView']);
+Route::get('/admin/transaksi/tambah', [adminController::class, 'tambahTransaksiView']);
+Route::post('/admin/transaksi/tambah', [adminController::class, 'tambahTransaksi']);
+Route::get('/admin/transaksi/konfirmasi/{id}', [adminController::class, 'konfirmasi']);
+Route::get('/admin/transaksi/invoice/{id}', [adminController::class, 'cetakInvoice']);
 

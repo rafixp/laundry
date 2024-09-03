@@ -9,11 +9,9 @@ class detailTransaksi extends Model
 {
     use HasFactory;
 
-    protected $table = [
+    protected $fillable = [
         'id',
-        'id_transaksi',
-        'id_paket',
         'qty',
-        'keterangan',
+        'total',
     ];
 }
