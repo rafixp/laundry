@@ -10,6 +10,7 @@ use App\Models\Member;
 use App\Models\Outlet;
 use App\Models\Paket;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class adminController extends Controller
 {
@@ -184,21 +185,53 @@ class adminController extends Controller
     }
 
     public function tambahTransaksi(Req $req){
-        $data = $req->all();
-        if(Transaksi::create($data)){
+        $data = [
+            "kode_invoice" => $req->kode_invoice,
+            "id_outlet" => $req->id_outlet,
+            "id_member" => $req->id_member,
+            "tgl" => date('Y-m-d'),
+            "batas_waktu" => $req->batas_waktu,
+            "biaya_tambahan" => $req->biaya_tambahan,
+            "diskon" => $req->diskon,
+            "pajak" => $req->pajak,
+            "id_user" => Auth::user()->id,
+        ];
+
+        $detil = [
+            "kode_invoice" => $req->kode_invoice,
+            "nama_member" => $req->id_member,
+            "qty" => $req->qty,
+            "total" => $req->paket * $req->qty,
+        ];
+
+        if(Transaksi::create($data) && detailTransaksi::create($detil)){
             return redirect('/admin/transaksi');
         }
     }
 
-    public function konfirmasi($id){
-        $get = Transaksi::findOrFail($id);
-        $paket = Paket::latest()->get();
-        return view('admin.transaksi.konfirmasi', compact('get','paket'));
+    public function prosesPesanan($id){
+        $cek = Transaksi::findOrFail($id);
+        if($cek->update(["status"=>"proses"])){
+            return redirect('/admin/transaksi');
+        }
     }
-
+    
     public function cetakInvoice($id){
         $get = Transaksi::findOrFail($id);
         $tgl = date('d F Y - H.i');
         return view('admin.transaksi.cetak', compact('get','tgl'));
+    }
+    
+    public function konfirmasi($id){
+        $get = Transaksi::findOrFail($id);
+        return view('admin.transaksi.konfirmasi', compact('get'));
+    }
+
+    public function konfirmasiPesan(Req $req){
+        $total = $req->total - $req->bayar;
+        $cek = Transaksi::findOrFail($id);
+        if($cek->update(["dibayar"=>"dibayar","tgl_bayar"=>date('Y-m-d')])){
+            return redirect('/admin/transaksi');
+        }
     }
 }

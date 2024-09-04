@@ -7,7 +7,8 @@
     <title>Login Laundry.id</title>
     <link rel="stylesheet" href="/assets/css-bs/bootstrap.min.css">
 </head>
-<body class="bg-primary">
+<body style="background: url('/assets/img/bg-404.jpeg'); background-size: cover;">
+    <br><br><br><br><br><br>
     <div class="container card bg-white shadow w-25 mx-auto mt-5 border-0">
         <div class="card-body p-5">
             <h4 class="mb-3">Login</h4>

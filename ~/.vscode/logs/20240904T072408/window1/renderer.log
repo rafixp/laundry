@@ -1,0 +1,3 @@
+2024-09-04 07:24:09.945 [info] Started local extension host with pid 18220.
+2024-09-04 07:24:10.336 [error] [onecentlin.laravel5-snippets]: Unknown language in `contributes.laravel5-snippets.language`. Provided value: blade
+2024-09-04 07:24:12.758 [info] [perf] Render performance baseline is 14ms

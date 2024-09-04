@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 02, 2024 at 02:27 PM
+-- Generation Time: Sep 03, 2024 at 01:59 PM
 -- Server version: 8.0.39-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.18
 
@@ -29,13 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `detail_transaksis` (
   `id` bigint UNSIGNED NOT NULL,
-  `id_transaksi` bigint NOT NULL,
-  `id_paket` bigint NOT NULL,
+  `nama_member` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `qty` double NOT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total` double NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `detail_transaksis`
+--
+
+INSERT INTO `detail_transaksis` (`id`, `nama_member`, `qty`, `total`, `created_at`, `updated_at`) VALUES
+(1, '', 3, 90000, '2024-09-02 21:27:33', '2024-09-02 21:27:33');
 
 -- --------------------------------------------------------
 
@@ -75,7 +81,8 @@ CREATE TABLE `members` (
 
 INSERT INTO `members` (`id`, `nama`, `alamat`, `jenis_kelamin`, `tlp`, `created_at`, `updated_at`) VALUES
 (1, 'Rahayu Hayatunajah', 'Jl. Singajaya RW 02', 'P', '085323376111', '2024-09-01 23:35:25', '2024-09-01 23:43:46'),
-(2, 'Rafi Ahfa Fauzan', 'Jl. Raya Banjar RT 022 / RW 03', 'L', '086413291218', '2024-09-01 23:43:27', '2024-09-01 23:43:58');
+(2, 'Rafi Ahfa Fauzan', 'Jl. Raya Banjar RT 022 / RW 03', 'L', '086413291218', '2024-09-01 23:43:27', '2024-09-01 23:43:58'),
+(4, 'Muhamad Ikhsan', 'Perum Cibeureum Indah', 'L', '0831172913273', '2024-09-02 20:44:20', '2024-09-02 20:44:20');
 
 -- --------------------------------------------------------
 
@@ -192,10 +199,10 @@ CREATE TABLE `transaksis` (
   `id` bigint UNSIGNED NOT NULL,
   `id_outlet` bigint NOT NULL,
   `kode_invoice` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_member` bigint NOT NULL,
+  `id_member` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl` datetime NOT NULL,
   `batas_waktu` datetime NOT NULL,
-  `tgl_bayar` datetime NOT NULL,
+  `tgl_bayar` datetime DEFAULT NULL,
   `biaya_tambahan` int NOT NULL,
   `diskon` double NOT NULL,
   `pajak` int NOT NULL,
@@ -205,6 +212,15 @@ CREATE TABLE `transaksis` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaksis`
+--
+
+INSERT INTO `transaksis` (`id`, `id_outlet`, `kode_invoice`, `id_member`, `tgl`, `batas_waktu`, `tgl_bayar`, `biaya_tambahan`, `diskon`, `pajak`, `status`, `dibayar`, `id_user`, `created_at`, `updated_at`) VALUES
+(1, 6, 'CLN20240903032126', 'Rafi Ahfa Fauzan', '2024-09-03 00:00:00', '2024-09-04 00:00:00', NULL, 1000, 9, 1000, 'baru', 'dibayar', 1, '2024-09-02 20:23:05', '2024-09-02 20:23:05'),
+(2, 6, 'CLN20240903032454', 'Rahayu Hayatunajah', '2024-09-03 00:00:00', '2024-09-05 00:00:00', NULL, 1000, 1, 9000, 'proses', 'belum dibayar', 1, '2024-09-02 20:25:15', '2024-09-02 20:25:15'),
+(5, 6, 'CLN20240903034927', 'Rahayu Hayatunajah', '2024-09-03 00:00:00', '2024-09-03 00:00:00', NULL, 10000, 1, 1000, 'baru', 'dibayar', 1, '2024-09-02 20:49:43', '2024-09-02 20:49:43');
 
 -- --------------------------------------------------------
 
@@ -310,7 +326,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `detail_transaksis`
 --
 ALTER TABLE `detail_transaksis`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -322,7 +338,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -352,7 +368,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `transaksis`
 --
 ALTER TABLE `transaksis`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -3,7 +3,7 @@
 @section('content')
 <br><br>
 <div class="container bg-white mx-auto p-3 rounded mt-2 shadow">
-    <h4>Konfirmasi Pemesanan</h4>
+    <h4>Konfirmasi Pembayaran</h4>
     <form action="/admin/transaksi/konfirmasi/{{$get->id}}" method="POST">
         @csrf
         <div class="form-group mt-2">
@@ -12,23 +12,15 @@
         </div>
         <div class="form-group mt-2">
             <label>Nama Pelanggan</label>
-            <input type="text" name="kode_invoice" class="form-control" value="{{$get->id_member}}" readonly>
+            <input type="text" name="nama" class="form-control" value="{{$get->id_member}}" readonly>
         </div>
         <div class="form-group mt-2">
-            <label>Paket</label>
-            <select name="paket" class="form-control">
-                @foreach ($paket as $c)
-                    <option value="{{$c->harga}}" onselect="hitung({{$c->harga}})">{{$c->nama_paket}}</option>
-                @endforeach
-            </select>
+            <label>Total Keseluruhan</label>
+            <input type="number" name="total" class="form-control" id="total" readonly>
         </div>
         <div class="form-group mt-2">
-            <label>Jumlah</label>
-            <input type="number" name="jumlah" class="form-control" id="jumlah">
-        </div>
-        <div class="form-group mt-2">
-            <label>Total yang Harus dibayar</label>
-            <input type="number" name="kode_invoice" class="form-control" id="total">
+            <label>Nominal Pembayaran</label>
+            <input type="number" name="bayar" class="form-control" id="jumlah">
         </div>
         <div class="form-group mt-2">
            <button class="btn btn-sm btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
@@ -37,9 +29,18 @@
 </div>
 <br><br><br>
 <script>
-    function hitung(harga){
-        var jum = document.getElementById('jumlah').value;
-        var simpantotal = document.getElementById('total');
+    const total = document.getElementById('total');
+    const jumlah = document.getElementById('jumlah');
+    const paket = document.getElementById('paket');
+
+    jumlah.addEventListener('change', bayar);
+    paket.addEventListener('change', bayar);
+
+    function bayar(){
+        const harga = document.getElementById('paket').value;
+        const qty = document.getElementById('jumlah').value;
+        var Total = harga * qty;
+        total.value = Total;
     }
 </script>
 @endsection

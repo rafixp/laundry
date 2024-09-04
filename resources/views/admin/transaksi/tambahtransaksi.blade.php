@@ -28,40 +28,33 @@
             </select>
         </div>
         <div class="form-group mt-1">
-            <label>Tanggal Masuk</label>
-            <input type="date" name="tgl" class="form-control form-sm">
-        </div>
-        <div class="form-group mt-1">
             <label>Batas Waktu</label>
             <input type="date" name="batas_waktu" class="form-control form-sm">
         </div>
+        <div class="form-group mt-2">
+            <label>Paket</label>
+            <select name="paket" class="form-control" id="paket">
+                <option>Pilih Paket</option>
+                @foreach ($paket as $c)
+                    <option value="{{$c->harga}}" id="harga">{{$c->nama_paket}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group mt-2">
+            <label>Jumlah</label>
+            <input type="number" name="qty" class="form-control" id="jumlah">
+        </div>
         <div class="form-group mt-1">
             <label>Biaya Tambahan</label>
-            <input type="number" name="biaya_tambahan" class="form-control form-sm">
+            <input type="number" name="biaya_tambahan" class="form-control form-sm" id="biaya">
         </div>
         <div class="form-group mt-1">
             <label>Diskon (%)</label>
-            <input type="number" name="diskon" class="form-control form-sm">
+            <input type="number" name="diskon" class="form-control form-sm" id="diskon">
         </div>
         <div class="form-group mt-1">
             <label>Pajak</label>
-            <input type="number" name="pajak" class="form-control form-sm">
-        </div>
-        <div class="form-group mt-1">
-            <label>Status</label>
-            <select name="status" class="form-control form-control">
-                <option value="Baru">Baru</option>
-                <option value="Proses">Proses</option>
-                <option value="Selesai">Selesai</option>
-                <option value="Diambil">Diambil</option>
-            </select>
-        </div>
-        <div class="form-group mt-1">
-            <label>Dibayar</label>
-            <select name="dibayar" class="form-control form-control">
-                <option value="Dibayar">Dibayar</option>
-                <option value="Belum Dibayar">Belum Dibayar</option>
-            </select>
+            <input type="number" name="pajak" class="form-control form-sm" id="pajak">
         </div>
         <div class="form-group mt-1">
             <button class="btn btn-sm btn-primary float-end"><i class="fas fa-save"></i> Simpan</button>

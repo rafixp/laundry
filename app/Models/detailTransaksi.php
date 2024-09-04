@@ -11,6 +11,8 @@ class detailTransaksi extends Model
 
     protected $fillable = [
         'id',
+        'kode_invoice',
+        'nama_member',
         'qty',
         'total',
     ];
