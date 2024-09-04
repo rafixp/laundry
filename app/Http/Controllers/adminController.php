@@ -223,7 +223,7 @@ class adminController extends Controller
     }
     
     public function konfirmasi($id){
-        $get = Transaksi::findOrFail($id);
+        $get = detailTransaksi::where('kode_invoice','=','CLN20240904064409')->get();
         return view('admin.transaksi.konfirmasi', compact('get'));
     }
 
