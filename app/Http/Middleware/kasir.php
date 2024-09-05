@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class kasir
 {
@@ -15,6 +16,10 @@ class kasir
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if(Auth::user()->role == "kasir"){
+            return $next($request);
+        }else{
+            return redirect('/');
+        }
     }
 }

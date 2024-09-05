@@ -23,7 +23,7 @@
 	<link rel="stylesheet" href="/assets/css/atlantis.min.css">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link rel="stylesheet" href="/assets/css/demo.css">
+	<link rel="stylesheet" href="/assets/custom/custom.css">
 </head>
 <body>
 	<div class="wrapper">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request as Req;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\detailTransaksi;
 use App\Models\Transaksi;
@@ -10,7 +11,8 @@ use App\Models\Member;
 use App\Models\Outlet;
 use App\Models\Paket;
 use Hash;
-use Illuminate\Support\Facades\Auth;
+
+date_default_timezone_set('Asia/Jakarta');
 
 class adminController extends Controller
 {
@@ -201,7 +203,7 @@ class adminController extends Controller
             "kode_invoice" => $req->kode_invoice,
             "nama_member" => $req->id_member,
             "qty" => $req->qty,
-            "total" => $req->paket * $req->qty,
+            "total" => $req->paket * $req->qty + $req->biaya_tambahan % $req->diskon + $req->pajak,
         ];
 
         if(Transaksi::create($data) && detailTransaksi::create($detil)){
@@ -216,22 +218,24 @@ class adminController extends Controller
         }
     }
     
-    public function cetakInvoice($id){
-        $get = Transaksi::findOrFail($id);
-        $tgl = date('d F Y - H.i');
-        return view('admin.transaksi.cetak', compact('get','tgl'));
-    }
-    
     public function konfirmasi($id){
-        $get = detailTransaksi::where('kode_invoice','=','CLN20240904064409')->get();
+        $get = detailTransaksi::where('kode_invoice', $id)->first();
         return view('admin.transaksi.konfirmasi', compact('get'));
     }
 
-    public function konfirmasiPesan(Req $req){
-        $total = $req->total - $req->bayar;
-        $cek = Transaksi::findOrFail($id);
-        if($cek->update(["dibayar"=>"dibayar","tgl_bayar"=>date('Y-m-d')])){
-            return redirect('/admin/transaksi');
+    public function konfirmasiPesan(Req $req, $id){
+        $total = $req->bayar - $req->total;
+        $cek = Transaksi::where('kode_invoice', $req->kode_invoice);
+        $kembalian = detailTransaksi::where('kode_invoice', $req->kode_invoice)->first();
+        if($cek->update(["dibayar"=>"dibayar","status"=>"selesai","tgl_bayar"=>date('Y-m-d')]) && $kembalian->update(['kembalian'=> $total])){
+            return redirect('/admin/transaksi/invoice/'.$req->kode_invoice);
         }
+    }
+
+    public function invoice($id){
+        $get = detailTransaksi::where('kode_invoice', $id)->first();
+        $detail = Transaksi::where('kode_invoice', $id)->first();
+        $tanggal = date('d F Y - H.i');
+        return view('admin.transaksi.invoice', compact('get','tanggal','detail'));
     }
 }

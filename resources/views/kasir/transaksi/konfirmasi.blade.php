@@ -1,10 +1,10 @@
-@extends('admin.navbar')    
+@extends('kasir.navbar')    
 
 @section('content')
 <br><br>
 <div class="container bg-white mx-auto p-3 rounded mt-2 shadow">
     <h4>Konfirmasi Pembayaran</h4>
-    <form action="/admin/transaksi/konfirmasi/{{$get->id}}" method="POST">
+    <form action="/kasir/transaksi/konfirmasi/{{$get->id}}" method="POST">
         @csrf
         <div class="form-group mt-2">
             <label>Kode Invoice</label>

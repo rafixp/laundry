@@ -15,5 +15,6 @@ class detailTransaksi extends Model
         'nama_member',
         'qty',
         'total',
+        'kembalian'
     ];
 }

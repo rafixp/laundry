@@ -25,7 +25,23 @@ class authController extends Controller
         $data = $req->only(['email','password']);
 
         if(Auth::attempt($data)){
-            return redirect('/admin/home');
+            switch (Auth::user()->role) {
+                case 'admin':
+                    return redirect('/admin/home');
+                    break;
+                
+                case 'kasir':
+                    return redirect('/kasir/home');
+                    break;
+
+                case 'owner':
+                    return redirect('/owner/home');
+                    break;
+
+                default:
+                    return redirect('/');
+                    break;
+            }
         }else{
             Session::flash('error','The email that you fill is not match on our records !');
             return redirect('/');

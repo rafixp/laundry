@@ -62,6 +62,27 @@ Route::middleware(['auth','admin:admin'])->group(function () {
     Route::get('/admin/transaksi/konfirmasi/{id}', [adminController::class, 'konfirmasi']);
     Route::post('/admin/transaksi/konfirmasi/{id}', [adminController::class, 'konfirmasiPesan']);
     Route::get('/admin/transaksi/proses/{id}', [adminController::class, 'prosesPesanan']);
+    Route::get('/admin/transaksi/invoice/{id}', [adminController::class, 'invoice']);
 });
 
+Route::middleware(['auth', 'kasir:kasir'])->group(function () {
+    Route::get('/kasir/home', [kasirController::class, 'home']);
+    Route::get('/kasir/logout', [kasirController::class, 'logout']);
 
+    Route::get('/kasir/member', [kasirController::class, 'memberView']);
+    Route::get('/kasir/member/tambah', [kasirController::class, 'tambahMemberView']);
+    Route::get('/kasir/member/edit/{id}', [kasirController::class, 'editMemberView']);
+    Route::post('/kasir/member/tambah', [kasirController::class, 'tambahMember']);
+    Route::post('/kasir/member/edit/{id}', [kasirController::class, 'editMember']);
+    Route::post('/kasir/member/edit/{id}', [kasirController::class, 'editMember']);
+    Route::get('/kasir/member/hapus/{id}', [kasirController::class, 'hapusMember']);
+
+    Route::get('/kasir/transaksi', [kasirController::class, 'transaksiView']);
+    Route::get('/kasir/transaksi/tambah', [kasirController::class, 'tambahTransaksiView']);
+    Route::post('/kasir/transaksi/tambah', [kasirController::class, 'tambahTransaksi']);
+    Route::get('/kasir/transaksi/konfirmasi/{id}', [kasirController::class, 'konfirmasi']);
+    Route::post('/kasir/transaksi/konfirmasi/{id}', [kasirController::class, 'konfirmasiPesan']);
+    Route::get('/kasir/transaksi/invoice/{id}', [kasirController::class, 'invoice']);
+    Route::get('/kasir/transaksi/proses/{id}', [kasirController::class, 'prosesPesanan']);
+
+});
