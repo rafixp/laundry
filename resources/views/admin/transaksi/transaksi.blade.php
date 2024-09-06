@@ -29,10 +29,12 @@
                         @if ($a->status == "proses")
                             <a href="/admin/transaksi/konfirmasi/{{$a->kode_invoice}}" class="btn btn-sm btn-info m-1"><i class="fas fa-hand-holding-usd"></i></a>
                             <a href="/admin/transaksi/invoice/{{$a->id}}" class="btn btn-sm btn-primary m-1"><i class="fas fa-print"></i></a>
+                        @elseif ($a->status == "selesai")
+                            <a href="/admin/transaksi/invoice/{{$a->kode_invoice}}" class="btn btn-sm btn-primary m-1"><i class="fas fa-print"></i></a>
                         @else
                             <a href="/admin/transaksi/proses/{{$a->id}}" class="btn btn-sm btn-warning m-1" onclick="return confirm('Proses pesanan ini ?')" disabled><i class="fas fa-sync"></i></a>
                             <a href="/admin/transaksi/konfirmasi/{{$a->kode_invoice}}" class="btn btn-sm btn-info m-1"><i class="fas fa-hand-holding-usd"></i></a>
-                            <a href="/admin/transaksi/invoice/{{$a->id}}" class="btn btn-sm btn-primary m-1"><i class="fas fa-print"></i></a>
+                            <a href="/admin/transaksi/invoice/{{$a->kode_invoice}}" class="btn btn-sm btn-primary m-1"><i class="fas fa-print"></i></a>
 
                         @endif
                     </td>

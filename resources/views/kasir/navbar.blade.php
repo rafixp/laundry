@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
+	<title>Kasir - Laundry.id</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="/assets/img/icon.ico" type="image/x-icon"/>
 
@@ -102,7 +102,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+							<a href="/kasir/home/">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -136,9 +136,9 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a data-toggle="collapse" href="/kasir/cetaklaporan">
+							<a href="/kasir/laporan">
 								<i class="fas fa-print"></i>
-								<p>Cetak Laporan</p>
+								<p>Data Laporan</p>
 							</a>
 						</li>
 						<li class="mx-4 mt-2">

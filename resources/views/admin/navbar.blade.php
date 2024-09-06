@@ -102,7 +102,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item">
-							<a href="/admin/home" aria-expanded="false">
+							<a href="/admin/home">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -151,9 +151,9 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a data-toggle="collapse" href="/admin/cetaklaporan">
+							<a href="/admin/laporan">
 								<i class="fas fa-print"></i>
-								<p>Cetak Laporan</p>
+								<p>Data Laporan</p>
 							</a>
 						</li>
 						<li class="mx-4 mt-2">

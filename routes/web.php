@@ -63,6 +63,9 @@ Route::middleware(['auth','admin:admin'])->group(function () {
     Route::post('/admin/transaksi/konfirmasi/{id}', [adminController::class, 'konfirmasiPesan']);
     Route::get('/admin/transaksi/proses/{id}', [adminController::class, 'prosesPesanan']);
     Route::get('/admin/transaksi/invoice/{id}', [adminController::class, 'invoice']);
+    Route::get('/admin/transaksi/cetak/{id}', [adminController::class, 'cetak']);
+    Route::get('/admin/laporan', [adminController::class, 'cetaklaporan']);
+    Route::get('/admin/laporan/generate', [adminController::class, 'generate']);
 });
 
 Route::middleware(['auth', 'kasir:kasir'])->group(function () {
@@ -80,9 +83,18 @@ Route::middleware(['auth', 'kasir:kasir'])->group(function () {
     Route::get('/kasir/transaksi', [kasirController::class, 'transaksiView']);
     Route::get('/kasir/transaksi/tambah', [kasirController::class, 'tambahTransaksiView']);
     Route::post('/kasir/transaksi/tambah', [kasirController::class, 'tambahTransaksi']);
+    Route::get('/kasir/transaksi/proses/{id}', [kasirController::class, 'prosesPesanan']);
     Route::get('/kasir/transaksi/konfirmasi/{id}', [kasirController::class, 'konfirmasi']);
     Route::post('/kasir/transaksi/konfirmasi/{id}', [kasirController::class, 'konfirmasiPesan']);
     Route::get('/kasir/transaksi/invoice/{id}', [kasirController::class, 'invoice']);
-    Route::get('/kasir/transaksi/proses/{id}', [kasirController::class, 'prosesPesanan']);
+    Route::get('/kasir/transaksi/cetak/{id}', [kasirController::class, 'cetak']);
+    Route::get('/kasir/laporan', [kasirController::class, 'cetaklaporan']);
+    Route::get('/kasir/laporan/generate', [kasirController::class, 'generate']);
+});
 
+Route::middleware(['auth', 'owner:owner'])->group(function () {
+    Route::get('/owner/home', [ownerController::class, 'home']);
+    Route::get('/owner/logout', [ownerController::class, 'logout']);
+    Route::get('/owner/laporan', [ownerController::class, 'laporan']);
+    Route::get('/owner/laporan/generate', [ownerController::class, 'generate']);
 });

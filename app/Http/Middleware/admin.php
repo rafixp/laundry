@@ -19,7 +19,7 @@ class admin
         if(Auth::user()->role == 'admin'){
             return $next($request);
         }else{
-            return redirect('/');
+            return abort(401);
         }
     }
 }

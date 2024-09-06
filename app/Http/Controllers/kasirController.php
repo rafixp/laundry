@@ -113,7 +113,7 @@ class kasirController extends Controller
         $get = detailTransaksi::where('kode_invoice', $id)->first();
         $detail = Transaksi::where('kode_invoice', $id)->first();
         $tanggal = date('d F Y - H.i');
-        return view('admin.transaksi.invoice', compact('get','tanggal','detail'));
+        return view('kasir.transaksi.invoice', compact('get','tanggal','detail'));
     }
 
     public function prosesPesanan($id){
@@ -121,5 +121,22 @@ class kasirController extends Controller
         if($cek->update(["status"=>"proses"])){
             return redirect('/kasir/transaksi');
         }
+    }
+
+    public function cetak($id){
+        $get = detailTransaksi::where('kode_invoice', $id)->first();
+        $detail = Transaksi::where('kode_invoice', $id)->first();
+        $tgl = date('d F Y - H.i');
+        return view('kasir.transaksi.cetak', compact('get','detail','tgl'));
+    }
+
+    public function cetaklaporan(){
+        $get = detailTransaksi::all();
+        return view('kasir.datalaporan', compact('get')); 
+    }
+
+    public function generate(){
+        $get = detailTransaksi::all();
+        return view('kasir.generate', compact('get'));
     }
 }

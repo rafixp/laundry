@@ -238,4 +238,21 @@ class adminController extends Controller
         $tanggal = date('d F Y - H.i');
         return view('admin.transaksi.invoice', compact('get','tanggal','detail'));
     }
+
+    public function cetak($id){
+        $get = detailTransaksi::where('kode_invoice', $id)->first();
+        $detail = Transaksi::where('kode_invoice', $id)->first();
+        $tgl = date('d F Y - H.i');
+        return view('admin.transaksi.cetak', compact('get','detail','tgl'));
+    }
+
+    public function cetaklaporan(){
+        $get = detailTransaksi::all();
+        return view('admin.datalaporan', compact('get')); 
+    }
+
+    public function generate(){
+        $get = detailTransaksi::all();
+        return view('admin.generate', compact('get'));
+    }
 }

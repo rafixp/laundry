@@ -39,6 +39,6 @@
         <br><br>
         <h6 class="w-50 text-center mx-auto fs-16">Terimakasih telah mempercayai kami, kepuasan pelanggan adalah prioritas kami. Apabila anda mengalami keluhan, silahkan kontak lewat email support@laundry.id</h6>
         <br>
-        <a href="/kasir/transaksi/cetak" class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak Invoice</a>
+        <a href="/kasir/transaksi/cetak/{{$get->kode_invoice}}" class="btn btn-sm btn-primary" target="blank"><i class="fas fa-print"></i> Cetak Invoice</a>
     </div>
 @endsection

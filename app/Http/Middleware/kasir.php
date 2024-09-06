@@ -19,7 +19,7 @@ class kasir
         if(Auth::user()->role == "kasir"){
             return $next($request);
         }else{
-            return redirect('/');
+            return abort(401);
         }
     }
 }

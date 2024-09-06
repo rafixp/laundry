@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
+	<title>Owner - Laundry.id</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="/assets/img/icon.ico" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
-	<script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+	<script src="/assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['../assets/css/fonts.min.css']},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['/assets/css/fonts.min.css']},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -19,11 +19,11 @@
 	</script>
 
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../assets/css/atlantis.min.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/atlantis.min.css">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link rel="stylesheet" href="../assets/css/demo.css">
+	<link rel="stylesheet" href="/assets/css/demo.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -32,7 +32,7 @@
 			<div class="logo-header" data-background-color="blue">
 				
 				<a href="index.html" class="logo">
-					<img src="../assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+					<img src="/assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -56,22 +56,22 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+									<img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<div class="dropdown-user-scroll scrollbar-outer">
 									<li>
 										<div class="user-box">
-											<div class="avatar-lg"><img src="../assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
+											<div class="avatar-lg"><img src="/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
-												<h4>Owner</h4>
-												<p class="text-muted">kasir@laundry.id</p>
+												<h4>{{Auth::user()->name}}</h4>
+												<p class="text-muted">{{Auth::user()->email}}</p>
 											</div>
 										</div>
 									</li>
 									<li>
-										<a class="dropdown-item" href="/admin/logout">Logout</a>
+										<a class="dropdown-item" href="/kasir/logout">Logout</a>
 									</li>
 								</div>
 							</ul>
@@ -88,13 +88,13 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Owner
-									<span class="user-level">Administrator</span>
+									{{Auth::user()->name}}
+									<span class="user-level">{{Auth::user()->role}}</span>
 								</span>
 							</a>
 							<div class="clearfix"></div>
@@ -102,7 +102,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+							<a href="/owner/home">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -114,13 +114,13 @@
 							<h4 class="text-section">Entri Menu</h4>
 						</li>
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#forms">
+							<a href="/owner/laporan">
 								<i class="fas fa-print"></i>
-								<p>Cetak Laporan</p>
+								<p>Data Laporan</p>
 							</a>
 						</li>
 						<li class="mx-4 mt-2">
-							<a href="admin/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-power-off"></i> </span>Logout</a> 
+							<a href="/owner/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-power-off"></i> </span>Logout</a> 
 						</li>
 					</ul>
 				</div>
@@ -130,62 +130,57 @@
 
 		<div class="main-panel">
 			<div class="content">
-				<div class="panel-header bg-primary-gradient">
-					<div class="page-inner py-5">
-						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-							<div>
-								<h2 class="text-white pb-2 fw-bold">Selamat datang Owner !</h2>
-								<h5 class="text-white op-7 mb-2">Selamat datang dan selamat bekerja !</h5>
-							</div>
-						</div>
-					</div>
-				</div>
+				@yield('content')
 			</div>
 		</div>
 		
 	</div>
 	<!--   Core JS Files   -->
-	<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="../assets/js/core/popper.min.js"></script>
-	<script src="../assets/js/core/bootstrap.min.js"></script>
+	<script src="/assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="/assets/js/core/popper.min.js"></script>
+	<script src="/assets/js/core/bootstrap.min.js"></script>
 
 	<!-- jQuery UI -->
-	<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+	<script src="/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 
 	<!-- jQuery Scrollbar -->
-	<script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
 
 	<!-- Chart JS -->
-	<script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+	<script src="/assets/js/plugin/chart.js/chart.min.js"></script>
 
 	<!-- jQuery Sparkline -->
-	<script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+	<script src="/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
 
 	<!-- Chart Circle -->
-	<script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+	<script src="/assets/js/plugin/chart-circle/circles.min.js"></script>
 
 	<!-- Datatables -->
-	<script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+	<script src="/assets/js/plugin/datatables/datatables.min.js"></script>
 
 	<!-- Bootstrap Notify -->
-	<script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+	<script src="/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 
 	<!-- jQuery Vector Maps -->
-	<script src="../assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
-	<script src="../assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+	<script src="/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+	<script src="/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
 	<!-- Sweet Alert -->
-	<script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+	<script src="/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
 	<!-- Atlantis JS -->
-	<script src="../assets/js/atlantis.min.js"></script>
+	<script src="/assets/js/atlantis.min.js"></script>
 
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
-	<script src="../assets/js/setting-demo.js"></script>
-	<script src="../assets/js/demo.js"></script>
+	<script src="/assets/js/setting-demo.js"></script>
+	<script src="/assets/js/demo.js"></script>
 	<script>
+		$(document).ready(function(){
+			$('#datatable').DataTable({});
+		});
+		
 		Circles.create({
 			id:'circles-1',
 			radius:45,
